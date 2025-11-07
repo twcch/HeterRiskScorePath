@@ -10,7 +10,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
 
-from model.tobit_model import TobitModel
+from model.censored_regression_model import CensoredRegressionModel
 from utils.data import load_feature_data
 from utils.one_hot_feature_encoder import onehot_encode
 from utils.draw import plot_summary_figure
@@ -19,11 +19,11 @@ from utils.draw import plot_summary_figure
 def boit_model(y, X, left=0, right=1000):
     X_const = sm.add_constant(X)
 
-    tobit_model = TobitModel(y, X_const, left=0, right=1000)
-    tobit_results = tobit_model.fit()
+    censored_regression_model = CensoredRegressionModel(y, X_const, left=0, right=1000)
+    censored_regression_model_results = censored_regression_model.fit()
 
     plot_summary_figure(
-        tobit_results.summary(), "outputs/figures/tobit_model_summary.png"
+        censored_regression_model_results.summary(), "outputs/figures/censored_regression_model_summary.png"
     )
 
 

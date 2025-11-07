@@ -4,9 +4,9 @@ from statsmodels.base.model import GenericLikelihoodModel
 from scipy.stats import norm
 
 
-class TobitModel(GenericLikelihoodModel):
+class CensoredRegressionModel(GenericLikelihoodModel):
     def __init__(self, endog, exog, left=0, right=1000, **kwargs):
-        super(TobitModel, self).__init__(endog, exog, **kwargs)
+        super(CensoredRegressionModel, self).__init__(endog, exog, **kwargs)
         self.left = left
         self.right = right
 
@@ -52,6 +52,6 @@ class TobitModel(GenericLikelihoodModel):
             ols = sm.OLS(self.endog, self.exog).fit()
             start_params = np.append(ols.params, ols.resid.std())
 
-        return super(TobitModel, self).fit(
+        return super(CensoredRegressionModel, self).fit(
             start_params=start_params, maxiter=maxiter, maxfun=maxfun, **kwargs
         )
