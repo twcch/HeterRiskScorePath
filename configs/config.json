@@ -1,0 +1,12 @@
+{
+    "data": {
+        "raw_data": "data/raw/raw_data.csv",
+        "processed_data": "data/processed/processed_data.csv",
+        "feature_data": "data/feature/feature_data.csv"
+    },
+    "preprocessing_data": {
+        "remove_missing_values": {
+            "enabled": true
+        }
+    }
+}
