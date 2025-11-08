@@ -17,13 +17,22 @@ from utils.draw import plot_summary_figure
 
 
 def cqrm(endog, exog, tau=0.5, left=0, right=1000):
+    # 確保 exog 是 DataFrame
+    if not isinstance(exog, pd.DataFrame):
+         exog = pd.DataFrame(exog)
+         
     X_const = sm.add_constant(exog)
-
+    # 再次確認 X_const 仍是 DataFrame 且有 columns
+    # print(X_const.columns) 
+    
     model = CensoredQuantileRegressionModel(
         endog, X_const, tau=tau, left=left, right=right
     )
     
-    censored_quantile_regression_model_results = model.fit()
+    print("正在使用 Bootstrap 估計真實的 P 值，這需要一點時間...")
+    # 強制使用 Bootstrap，跑 100 次 (正式報告建議 200-500 次)
+    # 這會取代原本那個快樂表結果
+    censored_quantile_regression_model_results = model.fit_bootstrap(n_boot=100)
 
     plot_summary_figure(
         censored_quantile_regression_model_results.summary(),
@@ -45,6 +54,15 @@ def main(config_path: str):
     X = feature_data.drop(columns=["overall_score"])
     
     cqrm(endog=y, exog=X)
+    
+    # import statsmodels.api as sm
+    # # 假設你已經載入了 y 和 X
+    # ols_model = sm.OLS(y, sm.add_constant(X))
+    # ols_results = ols_model.fit()
+    # print(ols_results.summary())
+
+    # # 檢查殘差的標準差 (這應該會極小，接近 0)
+    # print(f"殘差標準差: {ols_results.resid.std()}")
 
 
 if __name__ == "__main__":
