@@ -16,7 +16,7 @@ from utils.one_hot_feature_encoder import onehot_encode
 from utils.draw import plot_summary_figure
 
 
-def cqrm(endog, exog, tau=0.5, left=0, right=1000):
+def cqrm(feature_selection_method, endog, exog, tau=0.5, left=0, right=1000):
     # 確保 exog 是 DataFrame
     if not isinstance(exog, pd.DataFrame):
          exog = pd.DataFrame(exog)
@@ -36,15 +36,21 @@ def cqrm(endog, exog, tau=0.5, left=0, right=1000):
 
     plot_summary_figure(
         censored_quantile_regression_model_results.summary(),
-        f"outputs/figures/cqrm_tau{tau}_summary.png",
+        f"outputs/figures/{feature_selection_method}/cqrm_tau{tau}_summary.png",
     )
 
 
 def main(config_path: str):
     with open(config_path, "r") as f:
         config = json.load(f)
+    
+    feature_selection_method = config["experiment"]["feature_selection_method"]
 
-    feature_data_path = config["data"]["feature_data"]
+    if feature_selection_method == "lasso":
+        feature_data_path = config["data"]["feature_data_lasso"]
+    elif feature_selection_method == "pca":
+        feature_data_path = config["data"]["feature_data_pca"]
+
     feature_data = load_feature_data(feature_data_path)
 
     feature_data = onehot_encode(feature_data)
@@ -52,8 +58,9 @@ def main(config_path: str):
     # Fit model
     y = feature_data["overall_score"]
     X = feature_data.drop(columns=["overall_score"])
-    
-    cqrm(endog=y, exog=X, tau=0.1)
+
+    for tau in config["experiment"]["censored_quantile_regression"]["tau_list"]:
+        cqrm(feature_selection_method, endog=y, exog=X, tau=tau)
 
 
 if __name__ == "__main__":

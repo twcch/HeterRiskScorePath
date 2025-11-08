@@ -16,30 +16,36 @@ from utils.one_hot_feature_encoder import onehot_encode
 from utils.draw import plot_summary_figure
 
 
-def crm(y, X, left=0, right=1000):
+def crm(feature_selection_method, y, X, left=0, right=1000):
     X_const = sm.add_constant(X)
 
     censored_regression_model = CensoredRegressionModel(y, X_const, left=0, right=1000)
     censored_regression_model_results = censored_regression_model.fit()
 
     plot_summary_figure(
-        censored_regression_model_results.summary(), "outputs/figures/crm_summary.png"
+        censored_regression_model_results.summary(), f"outputs/figures/{feature_selection_method}/crm_summary.png"
     )
 
 
 def main(config_path: str):
     with open(config_path, "r") as f:
         config = json.load(f)
+    
+    feature_selection_method = config["experiment"]["feature_selection_method"]
 
-    feature_data_path = config["data"]["feature_data"]
+    if feature_selection_method == "lasso":
+        feature_data_path = config["data"]["feature_data_lasso"]
+    elif feature_selection_method == "pca":
+        feature_data_path = config["data"]["feature_data_pca"]
+
     feature_data = load_feature_data(feature_data_path)
 
     feature_data = onehot_encode(feature_data)
-
+    
     # Fit model
     y = feature_data["overall_score"]
     X = feature_data.drop(columns=["overall_score"])
-    crm(y, X, left=0, right=1000)
+    crm(feature_selection_method, y, X, left=0, right=1000)
 
 
 if __name__ == "__main__":

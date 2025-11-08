@@ -2,11 +2,13 @@
     "data": {
         "raw_data": "data/raw/raw_data.csv",
         "processed_data": "data/processed/processed_data.csv",
-        "feature_data": "data/feature/feature_data.csv"
+        "feature_data_lasso": "data/feature/feature_data_lasso.csv",
+        "feature_data_pca": "data/feature/feature_data_pca.csv"
     },
-    "preprocessing_data": {
-        "remove_missing_values": {
-            "enabled": true
+    "experiment": {
+        "feature_selection_method": "pca",
+        "censored_quantile_regression": {
+            "tau_list": [0.1, 0.5, 0.9]
         }
     }
 }
