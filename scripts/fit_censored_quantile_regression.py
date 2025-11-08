@@ -36,7 +36,7 @@ def cqrm(endog, exog, tau=0.5, left=0, right=1000):
 
     plot_summary_figure(
         censored_quantile_regression_model_results.summary(),
-        "outputs/figures/censored_quantile_regression_model_summary.png",
+        f"outputs/figures/cqrm_tau{tau}_summary.png",
     )
 
 
@@ -53,16 +53,7 @@ def main(config_path: str):
     y = feature_data["overall_score"]
     X = feature_data.drop(columns=["overall_score"])
     
-    cqrm(endog=y, exog=X)
-    
-    # import statsmodels.api as sm
-    # # 假設你已經載入了 y 和 X
-    # ols_model = sm.OLS(y, sm.add_constant(X))
-    # ols_results = ols_model.fit()
-    # print(ols_results.summary())
-
-    # # 檢查殘差的標準差 (這應該會極小，接近 0)
-    # print(f"殘差標準差: {ols_results.resid.std()}")
+    cqrm(endog=y, exog=X, tau=0.1)
 
 
 if __name__ == "__main__":

@@ -23,7 +23,7 @@ def crm(y, X, left=0, right=1000):
     censored_regression_model_results = censored_regression_model.fit()
 
     plot_summary_figure(
-        censored_regression_model_results.summary(), "outputs/figures/censored_regression_model_summary.png"
+        censored_regression_model_results.summary(), "outputs/figures/crm_summary.png"
     )
 
 
