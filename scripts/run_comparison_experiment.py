@@ -147,7 +147,11 @@ def main(config_path):
     # ============================================
     output_dir = "outputs/tables"
     os.makedirs(output_dir, exist_ok=True)
-    output_path = os.path.join(output_dir, "model_comparison_lasso.csv")
+
+    if config["experiment"].get("feature_selection_method") == "lasso":
+        output_path = os.path.join(output_dir, "model_comparison_lasso.csv")
+    else:
+        output_path = os.path.join(output_dir, "model_comparison_pca.csv")
     
     final_comparison.index.name = "Feature"
     # 將 sigma (scale) 移動到最後一列 (美觀考量，可選)
