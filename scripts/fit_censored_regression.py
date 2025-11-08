@@ -16,7 +16,7 @@ from utils.one_hot_feature_encoder import onehot_encode
 from utils.draw import plot_summary_figure
 
 
-def boit_model(y, X, left=0, right=1000):
+def crm(y, X, left=0, right=1000):
     X_const = sm.add_constant(X)
 
     censored_regression_model = CensoredRegressionModel(y, X_const, left=0, right=1000)
@@ -36,10 +36,10 @@ def main(config_path: str):
 
     feature_data = onehot_encode(feature_data)
 
-    # Fit the Tobit model
+    # Fit model
     y = feature_data["overall_score"]
     X = feature_data.drop(columns=["overall_score"])
-    boit_model(y, X, left=0, right=1000)
+    crm(y, X, left=0, right=1000)
 
 
 if __name__ == "__main__":
