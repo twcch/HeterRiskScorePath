@@ -1,4 +1,4 @@
-特徵選擇日誌 - 2025-11-10 13:13:38
+特徵選擇日誌 - 2025-11-10 13:23:07
 ================================================================================
 
 
@@ -23,7 +23,7 @@ Pearson 相關係數特徵選擇（排除高相關性特徵）
 排除 institution_query_3m (與目標相關性: 0.2614)，保留 institution_query_6m (與目標相關性: 0.3132)
 
 被排除的特徵數量: 4
-被排除的特徵: ['institution_query_total', 'mobile_realname_verification', 'institution_query_3m', 'hit_microloan_count']
+被排除的特徵: ['mobile_realname_verification', 'institution_query_total', 'institution_query_3m', 'hit_microloan_count']
 
 保留的特徵數量: 19
 保留的特徵: ['age', 'gender', 'haoxin_yijiantong', 'mobile_network_registered', 'fraud_risk', 'identity_feature_score', 'contract_ability_score', 'default_risk_score', 'consumer_preference_score', 'behavior_feature_score', 'social_influence_score', 'growth_potential_score', 'institution_industry', 'hit_institutions_count', 'hit_banks_count', 'hit_consumer_finance_count', 'institution_query_6m', 'haoxin_risk_score', 'haoxin_litigation_score']
@@ -31,16 +31,31 @@ Pearson 相關係數特徵選擇（排除高相關性特徵）
 
 
 ================================================================================
-LASSO 特徵選擇
+PCA 特徵降維
 ================================================================================
 原始特徵數量: 19
 原始特徵: ['age', 'gender', 'haoxin_yijiantong', 'mobile_network_registered', 'fraud_risk', 'identity_feature_score', 'contract_ability_score', 'default_risk_score', 'consumer_preference_score', 'behavior_feature_score', 'social_influence_score', 'growth_potential_score', 'institution_industry', 'hit_institutions_count', 'hit_banks_count', 'hit_consumer_finance_count', 'institution_query_6m', 'haoxin_risk_score', 'haoxin_litigation_score']
+保留方差比例閾值: 0.95
 
-被排除的特徵數量: 2
-被排除的特徵: ['age', 'social_influence_score']
+降維後主成分數量: 12
+各主成分解釋的方差比例:
+  PC1: 0.2839
+  PC2: 0.1606
+  PC3: 0.1528
+  PC4: 0.0964
+  PC5: 0.0563
+  PC6: 0.0496
+  PC7: 0.0381
+  PC8: 0.0363
+  PC9: 0.0334
+  PC10: 0.0218
+  PC11: 0.0187
+  PC12: 0.0127
 
-保留的特徵數量: 17
-保留的特徵: ['gender', 'haoxin_yijiantong', 'mobile_network_registered', 'fraud_risk', 'identity_feature_score', 'contract_ability_score', 'default_risk_score', 'consumer_preference_score', 'behavior_feature_score', 'growth_potential_score', 'institution_industry', 'hit_institutions_count', 'hit_banks_count', 'hit_consumer_finance_count', 'institution_query_6m', 'haoxin_risk_score', 'haoxin_litigation_score']
+累積解釋方差比例: 0.9604
+
+所有原始特徵已轉換為 12 個主成分
+主成分名稱: ['PC1', 'PC2', 'PC3', 'PC4', 'PC5', 'PC6', 'PC7', 'PC8', 'PC9', 'PC10', 'PC11', 'PC12']
 ================================================================================
 
-LASSO 特徵數據已保存至: data/feature/feature_data_lasso.csv
+PCA 特徵數據已保存至: data/feature/feature_data_pca.csv
