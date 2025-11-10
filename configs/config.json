@@ -10,5 +10,9 @@
         "censored_quantile_regression": {
             "tau_list": [0.1, 0.5, 0.9]
         }
+    },
+    "logs": {
+        "feature_selection_lasso_log": "outputs/logs/feature_selection_lasso.txt",
+        "feature_selection_pca_log": "outputs/logs/feature_selection_pca.txt"
     }
 }
