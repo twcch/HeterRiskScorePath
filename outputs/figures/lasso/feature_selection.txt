@@ -1,0 +1,46 @@
+特徵選擇日誌 - 2025-11-10 13:13:38
+================================================================================
+
+
+================================================================================
+Pearson 相關係數特徵選擇（排除高相關性特徵）
+================================================================================
+原始特徵數量: 23
+原始特徵: ['age', 'gender', 'haoxin_yijiantong', 'mobile_network_registered', 'mobile_realname_verification', 'fraud_risk', 'identity_feature_score', 'contract_ability_score', 'default_risk_score', 'consumer_preference_score', 'behavior_feature_score', 'social_influence_score', 'growth_potential_score', 'institution_industry', 'hit_institutions_count', 'hit_banks_count', 'hit_consumer_finance_count', 'hit_microloan_count', 'institution_query_total', 'institution_query_3m', 'institution_query_6m', 'haoxin_risk_score', 'haoxin_litigation_score']
+相關係數閾值: 0.8
+
+發現 5 對高度相關的特徵:
+  haoxin_yijiantong <-> mobile_realname_verification: 0.9757
+  hit_institutions_count <-> hit_microloan_count: 0.9815
+  hit_institutions_count <-> institution_query_total: 0.9258
+  hit_microloan_count <-> institution_query_total: 0.9056
+  institution_query_3m <-> institution_query_6m: 0.9093
+
+排除 mobile_realname_verification (與目標相關性: 0.0705)，保留 haoxin_yijiantong (與目標相關性: 0.0801)
+排除 hit_microloan_count (與目標相關性: 0.5569)，保留 hit_institutions_count (與目標相關性: 0.5695)
+排除 institution_query_total (與目標相關性: 0.5050)，保留 hit_institutions_count (與目標相關性: 0.5695)
+排除 institution_query_total (與目標相關性: 0.5050)，保留 hit_microloan_count (與目標相關性: 0.5569)
+排除 institution_query_3m (與目標相關性: 0.2614)，保留 institution_query_6m (與目標相關性: 0.3132)
+
+被排除的特徵數量: 4
+被排除的特徵: ['institution_query_total', 'mobile_realname_verification', 'institution_query_3m', 'hit_microloan_count']
+
+保留的特徵數量: 19
+保留的特徵: ['age', 'gender', 'haoxin_yijiantong', 'mobile_network_registered', 'fraud_risk', 'identity_feature_score', 'contract_ability_score', 'default_risk_score', 'consumer_preference_score', 'behavior_feature_score', 'social_influence_score', 'growth_potential_score', 'institution_industry', 'hit_institutions_count', 'hit_banks_count', 'hit_consumer_finance_count', 'institution_query_6m', 'haoxin_risk_score', 'haoxin_litigation_score']
+================================================================================
+
+
+================================================================================
+LASSO 特徵選擇
+================================================================================
+原始特徵數量: 19
+原始特徵: ['age', 'gender', 'haoxin_yijiantong', 'mobile_network_registered', 'fraud_risk', 'identity_feature_score', 'contract_ability_score', 'default_risk_score', 'consumer_preference_score', 'behavior_feature_score', 'social_influence_score', 'growth_potential_score', 'institution_industry', 'hit_institutions_count', 'hit_banks_count', 'hit_consumer_finance_count', 'institution_query_6m', 'haoxin_risk_score', 'haoxin_litigation_score']
+
+被排除的特徵數量: 2
+被排除的特徵: ['age', 'social_influence_score']
+
+保留的特徵數量: 17
+保留的特徵: ['gender', 'haoxin_yijiantong', 'mobile_network_registered', 'fraud_risk', 'identity_feature_score', 'contract_ability_score', 'default_risk_score', 'consumer_preference_score', 'behavior_feature_score', 'growth_potential_score', 'institution_industry', 'hit_institutions_count', 'hit_banks_count', 'hit_consumer_finance_count', 'institution_query_6m', 'haoxin_risk_score', 'haoxin_litigation_score']
+================================================================================
+
+LASSO 特徵數據已保存至: data/feature/feature_data_lasso.csv
